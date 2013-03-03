@@ -1,0 +1,37 @@
+﻿@model YoutubeTesti.Models.uTubSearchResult
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+	{
+        <p>@Html.TextBoxFor(x => x.searchString) </p>
+        <input type="submit" value="Search" />
+		if(Model != null)
+		{
+            if (Model.titles != null && Model.URLs != null)
+            {
+                //Search worked, do something
+				for (int i = 0; i < Model.titles.Count; i++)
+				{
+                    <div>
+                        <img src="@Model.URLs[i]" alt="image" />
+                        <p>
+                            @Model.titles[i]
+                        </p>
+                    </div>
+				}
+            }
+		}
+
+	}        
+</body>
+</html>
