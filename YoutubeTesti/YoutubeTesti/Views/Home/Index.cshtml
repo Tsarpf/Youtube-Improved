@@ -17,6 +17,15 @@
         var ytplayers = new Array(); //Because the number of players we will have will change
         var videoList = new Array(); //add video id's here and pop when we've made a player for that video
     </script>
+
+    <script type="text/javascript"> //this has to be here because for some reason youtube needs this to have it's own script tags
+        function OnYouTubePlayerReady(playerid) {
+            alert("yay, the callback was fired");
+            onOnYouTubePlayerReady();
+        }
+    </script>
+
+
     @using (Html.BeginForm())
 	{
         <p>@Html.TextBoxFor(x => x.searchString) </p>

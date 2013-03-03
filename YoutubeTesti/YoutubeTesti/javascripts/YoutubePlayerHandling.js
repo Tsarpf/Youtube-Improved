@@ -7,7 +7,7 @@
     swfobject.embedSWF("http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player" + ytplayers.length, "player" + ytplayers.length, "480", "295", "9", null, null, params, atts);
 }
 
-function onYouTubePlayerReady(playerId) //Is automatically called after youtube player has finished loading itself.
+function onOnYouTubePlayerReady() //executed when onYouTubePlayerReady() is, hence the (retarded) name
 {
     alert("got to utub callback");
     ytplayers.push(document.getElementById("ytPLayer" + ytplayers.length));
@@ -25,3 +25,4 @@ function onYouTubePlayerReady(playerId) //Is automatically called after youtube 
     ytplayers[ytplayers.length - 1].cueVideoById(videoList.shift()); //shift() Removes the first item of the array, and returns that item.
 
 }
+
