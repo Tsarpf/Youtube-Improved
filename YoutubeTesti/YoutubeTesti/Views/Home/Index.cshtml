@@ -8,33 +8,43 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>YOUTUBEiMPROVED</title>
+    <script type="text/javascript" src="~/javascripts/YoutubePlayerHandling.js"> </script>
+    <script type="text/javascript" src="~/javascripts/swfobject.js"> </script>
 </head>
 <body>
+    <script type="text/javascript">
+        var ytplayers = new Array(); //Because the number of players we will have will change
+        var videoList = new Array(); //add video id's here and pop when we've made a player for that video
+    </script>
     @using (Html.BeginForm())
 	{
         <p>@Html.TextBoxFor(x => x.searchString) </p>
         <input type="submit" value="Search" />
 		if(Model != null)
 		{
-            if (Model.titles != null && Model.URLs != null)
+            if (Model.titles != null && Model.videoIDs != null)
             {
                 //Search worked, do something
 				for (int i = 0; i < Model.titles.Count; i++)
 				{
-                    <div>
-                        <img src="@Model.URLs[i]" alt="image" />
+                    <div id="player" + @i>
                         <p>
                             @Model.titles[i]
                         </p>
                     </div>
+                        <script type="text/javascript">
+
+                            videoList.push("@Model.videoIDs[i]");
+                            createNewPlayer();
+                        </script>
+
 				}
             }
 		}  
-		
-		<p></p>
-        <p>testink testink github deployment</p>
+	}
+    
 
-	}        
+      
 </body>
 </html>

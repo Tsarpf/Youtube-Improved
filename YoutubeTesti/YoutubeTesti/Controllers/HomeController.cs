@@ -51,14 +51,15 @@ namespace YoutubeTesti.Controllers
 
 			uTubSearchResult utubSearchResult = new uTubSearchResult();
 			utubSearchResult.titles = new List<string>();
-			utubSearchResult.URLs = new List<string>();
+			utubSearchResult.videoIDs = new List<string>();
 
 			foreach (SearchResult searchResult in searchResponse.Items)
 			{
 				if (searchResult.Id.Kind == "youtube#video")
 				{
 					utubSearchResult.titles.Add(searchResult.Snippet.Title);
-                    utubSearchResult.URLs.Add(searchResult.Snippet.Thumbnails[searchResult.Snippet.Thumbnails.Keys.ToArray()[0]].Url);
+                    //utubSearchResult.URLs.Add(searchResult.Snippet.Thumbnails[searchResult.Snippet.Thumbnails.Keys.ToArray()[0]].Url);
+					utubSearchResult.videoIDs.Add(searchResult.Id.VideoId);
 				}
 			}
 
