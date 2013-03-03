@@ -11,6 +11,14 @@
     <title>YOUTUBEiMPROVED</title>
     <script type="text/javascript" src="~/javascripts/YoutubePlayerHandling.js"> </script>
     <script type="text/javascript" src="~/javascripts/swfobject.js"> </script>
+
+    <script type="text/javascript"> //this has to be here because for some reason youtube needs this to have it's own script tags
+        window.onYouTubePlayerReady = function(playerid) {
+            alert("yay, the callback was fired");
+            onOnYouTubePlayerReady();
+        }
+    </script>
+
 </head>
 <body>
     <script type="text/javascript">
@@ -18,12 +26,7 @@
         var videoList = new Array(); //add video id's here and pop when we've made a player for that video
     </script>
 
-    <script type="text/javascript"> //this has to be here because for some reason youtube needs this to have it's own script tags
-        function OnYouTubePlayerReady(playerid) {
-            alert("yay, the callback was fired");
-            onOnYouTubePlayerReady();
-        }
-    </script>
+
 
 
     @using (Html.BeginForm())

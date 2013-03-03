@@ -4,7 +4,8 @@
 
     var atts = { id: "ytPlayer" + ytplayers.length }; //This is the html id using which we can find the element with getElementById etc
 
-    swfobject.embedSWF("http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player" + ytplayers.length, "player" + ytplayers.length, "480", "295", "9", null, null, params, atts);
+    swfobject.embedSWF("http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player" +
+        ytplayers.length, "player" + ytplayers.length, "480", "295", "9", null, null, params, atts);
 }
 
 function onOnYouTubePlayerReady() //executed when onYouTubePlayerReady() is, hence the (retarded) name
