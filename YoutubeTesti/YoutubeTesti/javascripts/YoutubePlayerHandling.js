@@ -57,15 +57,26 @@ function startVideoCheck() {
 
 function setVideoLength()
 {
-    currentVideoLength = ytplayers[currentVideoIdx].getDuration();
+    var length = ytplayers[currentVideoIdx].getDuration();
+    if (length != 0) {
+        currentVideoLength = length;
+    }
+    else {
+        setTimeout("setVideoLength()", 500);
+    }
 }
 
 function removeLastVideo() {
-    var mainDiv = document.getElementById("mainDiv");
-    mainDiv.removeChild(document.getElementById(videoDivList.shift())); //remove the div containing the video
-    mainDiv.removeChild(document.getElementById(videoTitleDivList.shift())); //remove the title div of the video
-    ytplayers.shift(); //remove the player from the player list
-    currentVideoIdx--; //because all indices in the player list are moved one backwards, we have to compensate
+    if (ytplayers[0].getPlayerState() == 0) {
+        var mainDiv = document.getElementById("mainDiv");
+        mainDiv.removeChild(document.getElementById(videoDivList.shift())); //remove the div containing the video
+        mainDiv.removeChild(document.getElementById(videoTitleDivList.shift())); //remove the title div of the video
+        ytplayers.shift(); //remove the player from the player list
+        currentVideoIdx--; //because all indices in the player list are moved one backwards, we have to compensate
+    }
+    else {
+        setTimeout("removeLastVideo", 500);
+    }
 
 }
 
@@ -81,9 +92,9 @@ function checkVideoState()
         else if (currentVideoLength - ytplayers[currentVideoIdx].getCurrentTime() <= 2) {
             currentVideoIdx++;
             ytplayers[currentVideoIdx].playVideo();
-            currentVideoLength = 99999;
-            setTimeout("setVideoLength()", 2000);
-            setTimeout("removeLastVideo()", 1);
+            currentVideoLength = 999999;
+            setTimeout("setVideoLength()", 500);
+            setTimeout("removeLastVideo()", 500);
             overHalfway = false;
         }
     }
