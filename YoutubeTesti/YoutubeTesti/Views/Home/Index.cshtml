@@ -12,21 +12,8 @@
     <script type="text/javascript" src="~/javascripts/YoutubePlayerHandling.js"> </script>
     <script type="text/javascript" src="~/javascripts/swfobject.js"> </script>
 
-    <script type="text/javascript"> //this has to be here because for some reason youtube needs this to have it's own script tags... probably.
-        window.onYouTubePlayerReady = function(playerId) {
-            onOnYouTubePlayerReady();
-        }
-    </script>
-
 </head>
 <body>
-    <script type="text/javascript">
-        var ytplayers = new Array(); //In an array so the number of youtube players isn't hard coded
-        var videoList = new Array(); //add video ids here and pop when we've made a player for that video
-    </script>
-
-
-
 
     @using (Html.BeginForm())
 	{
@@ -37,12 +24,12 @@
             if (Model.titles != null && Model.videoIDs != null)
             {
                 //Search worked, do something
-				for (int i = 0; i < Model.titles.Count; i++)
+                <div id="mainDiv" style="background-color: #606060">
+				@for (int i = 0; i < Model.titles.Count; i++)
 				{
-                    <p></p> //add one empty paragraph so the uppermost video is below the search button
 
 				    //Titles have their own div so that the text isn't replaced by the video
-		            <div id="videoTitle@(i)">
+		            <div id="videoTitle@(i)" style="background-color: #909090">
                     <p>
                         @Model.titles[i]
                     </p>
@@ -52,10 +39,15 @@
                     <div id="playerDiv@(i)"> Loading... </div> //Empty div the content of which is replaced by a video after the video has loaded.
                     <script type="text/javascript">
                         videoList.push("@Model.videoIDs[i]");
-                        createNewPlayer(@i);
+                        createNewPlayer(@i); //Function defined in YoutubePlayerHandling
                     </script>
-
 				}
+                </div>
+		
+				//Start playlist mode now that all players have been created
+				<script type="text/javascript">
+				    setTimeout("startPlaylistMode()", 1000); //Start the playlist mode after waiting two seconds
+				</script>
             }
 		}  
 	}
