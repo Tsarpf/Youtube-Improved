@@ -1,17 +1,25 @@
-﻿var createNewPlayer = function ()
+﻿var createNewPlayer = function (count)
 {
     var params = { allowScriptAccess: "always" }; //Enables access to players controls from other hosts, not sure if needed...
 
-    var atts = { id: "ytPlayer" + ytplayers.length }; //This is the html id using which we can find the element with getElementById etc
+    var atts = { id: "ytPlayer" + count }; //This is the html id using which we can find the element with getElementById etc
 
-    swfobject.embedSWF("http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=player" +
-        ytplayers.length, "player" + ytplayers.length, "480", "295", "9", null, null, params, atts);
+    var playerApiId = "apiplayer" + count;
+    var playerDivId = "playerDiv" + count;
+
+    swfobject.embedSWF("http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=" + playerApiId,
+        playerDivId, "480", "295", "9", null, null, params, atts);
+
+    //Debug stuff
+    //alert(playerApiId);
+    //alert(playerDivId);
+    //alert(swfobject);
+    //alert(videoList[videoList.length - 1]);
 }
 
 function onOnYouTubePlayerReady() //executed when onYouTubePlayerReady() is, hence the (retarded) name
 {
-    alert("got to utub callback");
-    ytplayers.push(document.getElementById("ytPLayer" + ytplayers.length));
+    ytplayers.push(document.getElementById("ytPlayer" + ytplayers.length.toString()));
 
     //If we need to do something with the player periodically, we could add a timer here.
     //updatePlayerInfo is just a function we could make and name it anything we want...
@@ -24,6 +32,6 @@ function onOnYouTubePlayerReady() //executed when onYouTubePlayerReady() is, hen
 
     //This starts to play the video with the given id
     ytplayers[ytplayers.length - 1].cueVideoById(videoList.shift()); //shift() Removes the first item of the array, and returns that item.
-
+    //ytplayers[ytplayers.length - 1].playVideo();
 }
 

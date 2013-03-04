@@ -12,9 +12,8 @@
     <script type="text/javascript" src="~/javascripts/YoutubePlayerHandling.js"> </script>
     <script type="text/javascript" src="~/javascripts/swfobject.js"> </script>
 
-    <script type="text/javascript"> //this has to be here because for some reason youtube needs this to have it's own script tags
-        window.onYouTubePlayerReady = function(playerid) {
-            alert("yay, the callback was fired");
+    <script type="text/javascript"> //this has to be here because for some reason youtube needs this to have it's own script tags... probably.
+        window.onYouTubePlayerReady = function(playerId) {
             onOnYouTubePlayerReady();
         }
     </script>
@@ -22,8 +21,8 @@
 </head>
 <body>
     <script type="text/javascript">
-        var ytplayers = new Array(); //Because the number of players we will have will change
-        var videoList = new Array(); //add video id's here and pop when we've made a player for that video
+        var ytplayers = new Array(); //In an array so the number of youtube players isn't hard coded
+        var videoList = new Array(); //add video ids here and pop when we've made a player for that video
     </script>
 
 
@@ -40,16 +39,21 @@
                 //Search worked, do something
 				for (int i = 0; i < Model.titles.Count; i++)
 				{
-                    <div id="player" + @i>
-                        <p>
-                            @Model.titles[i]
-                        </p>
-                    </div>
-                        <script type="text/javascript">
+                    <p></p> //add one empty paragraph so the uppermost video is below the search button
 
-                            videoList.push("@Model.videoIDs[i]");
-                            createNewPlayer();
-                        </script>
+				    //Titles have their own div so that the text isn't replaced by the video
+		            <div id="videoTitle@(i)">
+                    <p>
+                        @Model.titles[i]
+                    </p>
+		            </div>
+		
+		            
+                    <div id="playerDiv@(i)"> Loading... </div> //Empty div the content of which is replaced by a video after the video has loaded.
+                    <script type="text/javascript">
+                        videoList.push("@Model.videoIDs[i]");
+                        createNewPlayer(@i);
+                    </script>
 
 				}
             }
