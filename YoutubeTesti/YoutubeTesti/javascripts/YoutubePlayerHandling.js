@@ -83,7 +83,7 @@ function checkVideoState()
             ytplayers[currentVideoIdx].playVideo();
             currentVideoLength = 99999;
             setTimeout("setVideoLength()", 2000);
-            setTimeout("removeLastVideo()", 750);
+            setTimeout("removeLastVideo()", 1);
             overHalfway = false;
         }
     }
