@@ -90,15 +90,19 @@ function checkVideoState()
             overHalfway = true;
         }
         else if (currentVideoLength - ytplayers[currentVideoIdx].getCurrentTime() <= 2) {
-            currentVideoIdx++;
-            ytplayers[currentVideoIdx].playVideo();
-            currentVideoLength = 999999;
-            setTimeout("setVideoLength()", 500);
-            setTimeout("removeLastVideo()", 500);
-            overHalfway = false;
+            playNextVideo();
         }
     }
     else {
         clearInterval(videoStateTimer);
     }
+}
+
+function playNextVideo() {
+    currentVideoIdx++;
+    ytplayers[currentVideoIdx].playVideo();
+    currentVideoLength = 999999;
+    setTimeout("setVideoLength()", 500);
+    setTimeout("removeLastVideo()", 500);
+    overHalfway = false;
 }
