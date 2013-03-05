@@ -60,7 +60,7 @@ namespace YOUTUBEiMPROVED.Controllers
 						if (searchResult.Id.Kind == "youtube#video")
 						{
 							searchResults.titles.Add(searchResult.Snippet.Title);
-                            //the next line is useful for getting video thumbnail urls which can then be used with <img> in the views.
+                            //the next line is useful for getting video thumbnail urls which can then be used with <img> in the html views.
 							//utubSearchResult.URLs.Add(searchResult.Snippet.Thumbnails[searchResult.Snippet.Thumbnails.Keys.ToArray()[0]].Url);
 							searchResults.videoIDs.Add(searchResult.Id.VideoId);
 						}
