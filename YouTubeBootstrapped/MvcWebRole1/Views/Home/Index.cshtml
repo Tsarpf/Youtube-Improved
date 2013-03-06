@@ -24,15 +24,15 @@
 		{ //player size 640 360
 			for(int i = 0; i < 2; i++)
 			{
-                <div id="mainVideoDiv:@i" style="position:absolute; width: 670px; height: 475px; top: 20px; left:20px;">
+                <div id="mainVideoDiv@(i)" style="position:absolute; width: 670px; height: 475px; top: 20px; left:20px;">
 
-                    <div id="videoTitle:@i" class="well" style="position: absolute; right:30px; left:0px;">@Model.titles[i]</div>
+                    <div id="videoTitle@(i)" class="well" style="position: absolute; right:30px; left:0px;">@Model.titles[i]</div>
 
-                    <div id="videoDiv:@i" class="well" style="position: absolute; bottom: 30px; right:30px;top:65px;left:0px;"> Loading....</div>
+                    <div id="videoDiv@(i)" class="well" style="position: absolute; bottom: 30px; right:30px;top:65px;left:0px;"> Loading....</div>
 
-                    <div id="v-slider:@i" style="position:absolute; right:0px; top:0px; bottom:0px; height:425px; width:20px;"></div>
+                    <div id="v-slider@(i)" class="v-slider" style="position:absolute; right:0px; top:0px; bottom:0px; height:425px; width:20px;"></div>
 
-                    <div id="h-slider:@i" style="position:absolute; left:0px; right:0px; bottom:0px; height:20px;"></div>
+                    <div id="h-slider@(i)" class="h-slider" style="position:absolute; left:0px; right:0px; bottom:0px; height:20px;"></div>
 
                 </div>
 	        }
@@ -44,17 +44,23 @@
 
             <script type="text/javascript">
                     $(document).ready(function () {
+
+                        //document.getElementById("mainVideoDiv1").style.visibility = "hidden"; //hide the other player
+                        $('#mainVideoDiv1').hide();
+
                         $('button').button();
 
                         $('.button').button();
 
-                        $('#h-slider').slider({
+                        $('.h-slider').slider({
                             range: "min",
                             min: 0,
                             value: 0,
                             max: 100,
                             slide: function (event, ui) {
                                 $(this).find('.ui-slider-handle span').text(ui.value);
+                                var onePercentInSeconds = videoLength / 100;
+                                mainPlayer.seekTo(ui.value * onePercentInSeconds);
                             },
                             create: function (event, ui) {
                                 var txtV = $(this).slider('value');
@@ -63,7 +69,7 @@
                             }
                         });
 
-                        $('#v-slider').slider({
+                        $('.v-slider').slider({
                             orientation: "vertical",
                             range: "min",
                             min: 0,
@@ -88,7 +94,9 @@
                         });
                     });
                     videoList.push("@Model.videoIDs[0]");
-                    createNewPlayer();
+                    videoList.push("@Model.videoIDs[1]");
+                    createNewPlayer(0);
+                    //createNewPlayer(1);
             </script>
 		}
 	}

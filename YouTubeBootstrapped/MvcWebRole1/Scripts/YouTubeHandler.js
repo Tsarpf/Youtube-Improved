@@ -4,16 +4,16 @@ var videoLength = 0;
 var progressPercent = 0;
 var mainPlayer;
 
-function createNewPlayer() {
+function createNewPlayer(index) {
 
     var params = { allowScriptAccess: "always" };
 
 //<div id="videoDiv" class="well" style="position: absolute; bottom: 30px; right:30px;top:65px;left:0px;"> Loading....</div>
-    var atts = { id: "ytPlayer", style: "position: absolute; bottom: 50px; right:30px;left:0px;"};
+    var atts = { id: "ytPlayer" + index, style: "position: absolute; bottom: 50px; right:30px;left:0px;" };
 
-    var playerApiId = "player0";
+    var playerApiId = "player" + index;
 
-    var playerDivId = "videoDiv";
+    var playerDivId = "videoDiv" + index;
 
     swfobject.embedSWF("http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=" + playerApiId,
         playerDivId, "640", "360", "9", null, null, params, atts);
@@ -22,7 +22,7 @@ function createNewPlayer() {
 
 function onYouTubePlayerReady()
 {
-    mainPlayer = document.getElementById("ytPlayer");
+    mainPlayer = document.getElementById("ytPlayer0");
 
     mainPlayer.cueVideoById(videoList.shift(), 0, "highres"); //get video from top of list, start at 0 seconds, maximum available quality
     mainPlayer.playVideo();
@@ -69,8 +69,8 @@ function prepareProgressBar() {
 
 function updateProgressBar(){
     progressPercent =  ((mainPlayer.getCurrentTime() / videoLength) * 100).toFixed();
-    $('#h-slider').slider("value", progressPercent);
+    $('.h-slider').slider("value", progressPercent);
     var text = (videoLength - mainPlayer.getCurrentTime()).toFixed() + "s";
-    $('#h-slider').find('.ui-slider-handle span').text(text)
+    $('.h-slider').find('.ui-slider-handle span').text(text)
 }
 
