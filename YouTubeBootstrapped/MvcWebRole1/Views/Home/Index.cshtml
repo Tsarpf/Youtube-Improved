@@ -9,11 +9,105 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link type="text/css" href="~/jquery-bootstrap/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/jquery-bootstrap/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet" />
+    <link type="text/css" href="~/jquery-bootstrap/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="~/jquery-bootstrap/assets/css/docs.css" rel="stylesheet" />
+    <link type="text/css" href="~/jquery-bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+
     <title>Index</title>
 </head>
 <body>
-    <div>
-        
-    </div>
+    @if(Model != null)
+	{
+        if(Model.titles != null && Model.videoIDs != null)
+		{ //player size 640 360
+			for(int i = 0; i < 2; i++)
+			{
+                <div id="mainVideoDiv:@i" style="position:absolute; width: 670px; height: 475px; top: 20px; left:20px;">
+
+                    <div id="videoTitle:@i" class="well" style="position: absolute; right:30px; left:0px;">@Model.titles[i]</div>
+
+                    <div id="videoDiv:@i" class="well" style="position: absolute; bottom: 30px; right:30px;top:65px;left:0px;"> Loading....</div>
+
+                    <div id="v-slider:@i" style="position:absolute; right:0px; top:0px; bottom:0px; height:425px; width:20px;"></div>
+
+                    <div id="h-slider:@i" style="position:absolute; left:0px; right:0px; bottom:0px; height:20px;"></div>
+
+                </div>
+	        }
+            <script src="~/Scripts/jquery-1.9.1.min.js"> </script>
+            <script src="~/jquery-bootstrap/assets/js/bootstrap.min.js"></script>
+            <script src="~/jquery-bootstrap/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+            <script src="~/Scripts/YouTubeHandler.js"></script>
+            <script src="~/Scripts/swfobject.js"></script>
+
+            <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('button').button();
+
+                        $('.button').button();
+
+                        $('#h-slider').slider({
+                            range: "min",
+                            min: 0,
+                            value: 0,
+                            max: 100,
+                            slide: function (event, ui) {
+                                $(this).find('.ui-slider-handle span').text(ui.value);
+                            },
+                            create: function (event, ui) {
+                                var txtV = $(this).slider('value');
+                                $(this).find('.ui-slider-handle').button();
+                                $(this).find('.ui-slider-handle span').text(txtV);
+                            }
+                        });
+
+                        $('#v-slider').slider({
+                            orientation: "vertical",
+                            range: "min",
+                            min: 0,
+                            max: 100,
+                            value: 60,
+                            slide: function (event, ui) {
+                                $(this).find('.ui-slider-handle span').text(ui.value);
+                            },
+                            create: function (event, ui) {
+                                var txtV = $(this).slider('value');
+                                $(this).find('.ui-slider-handle').button();
+                                $(this).find('.ui-slider-handle span').text(txtV);
+                                $(this).find('.ui-slider-handle').css({
+                                    '-moz-transform': 'rotate(270deg)',
+                                    '-webkit-transform': 'rotate(270deg)',
+                                    '-o-transform': 'rotate(270deg)',
+                                    '-ms-transform': 'rotate(270deg)',
+                                    'position':'absolute',
+                                    'left':'-14px'
+                                });
+                            }
+                        });
+                    });
+                    videoList.push("@Model.videoIDs[0]");
+                    createNewPlayer();
+            </script>
+		}
+	}
+    else
+	{
+        using (Html.BeginForm())
+        {
+            <div style="margin: auto; width:200px;">
+                @Html.TextBoxFor(x => x.searchString)
+                <p></p>
+                <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />     
+            </div>		            <script src="~/Scripts/jquery-1.9.1.min.js"> </script>
+            <script src="~/jquery-bootstrap/assets/js/bootstrap.min.js"></script>
+            <script src="~/jquery-bootstrap/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+		
+		    <script type="text/javascript">
+                $('.button').button();
+            </script>
+        }
+	}
 </body>
 </html>
