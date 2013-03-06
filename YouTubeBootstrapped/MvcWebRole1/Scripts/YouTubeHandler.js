@@ -27,7 +27,6 @@ function onYouTubePlayerReady()
     mainPlayer.cueVideoById(videoList.shift(), 0, "highres"); //get video from top of list, start at 0 seconds, maximum available quality
     mainPlayer.playVideo();
 
-    $('.v-slider').slider
 
     setTimeout("setVideoLength()", 1000);
 }
@@ -41,7 +40,6 @@ function setVideoLength() {
         }
 
         videoLength = length;
-        prepareProgressBar();
     }
 }
 
@@ -51,6 +49,7 @@ function setVideoLength() {
         if (length != 0){ //Length is 0 when we've started playing but metadata hasn't propagated yet.
             videoLength = length;
             prepareProgressBar();
+            prepareVolumeBar();
             return;
         }
     }
@@ -58,6 +57,13 @@ function setVideoLength() {
     setTimeout("setVideoLength()", 500);
 }
 
+function prepareVolumeBar() {
+    mainPlayer.setVolume(50);
+    $('.v-slider').slider("value", mainPlayer.getVolume());
+    var txtV = $('.v-slider').slider('value');
+    $('.v-slider').find('.ui-slider-handle').button();
+    $('.v-slider').find('.ui-slider-handle span').text(txtV);
+}
 
 function prepareProgressBar() {
     var interval = videoLength / 100;
