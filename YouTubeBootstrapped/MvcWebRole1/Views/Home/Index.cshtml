@@ -41,63 +41,14 @@
             <script src="~/jquery-bootstrap/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
             <script src="~/Scripts/YouTubeHandler.js"></script>
             <script src="~/Scripts/swfobject.js"></script>
+            <script src="~/Scripts/JQueryStuff.js"></script>
 
-            <script type="text/javascript">
-                    $(document).ready(function () {
-
-                        //document.getElementById("mainVideoDiv1").style.visibility = "hidden"; //hide the other player
-                        $('#mainVideoDiv1').hide();
-
-                        $('button').button();
-
-                        $('.button').button();
-
-                        $('.h-slider').slider({
-                            range: "min",
-                            min: 0,
-                            value: 0,
-                            max: 100,
-                            slide: function (event, ui) {
-                                $(this).find('.ui-slider-handle span').text(ui.value);
-                                var onePercentInSeconds = videoLength / 100;
-                                mainPlayer.seekTo(ui.value * onePercentInSeconds);
-                            },
-                            create: function (event, ui) {
-                                var txtV = $(this).slider('value');
-                                $(this).find('.ui-slider-handle').button();
-                                $(this).find('.ui-slider-handle span').text(txtV);
-                            }
-                        });
-
-                        $('.v-slider').slider({
-                            orientation: "vertical",
-                            range: "min",
-                            min: 0,
-                            max: 100,
-                            value: 60,
-                            slide: function (event, ui) {
-                                $(this).find('.ui-slider-handle span').text(ui.value);
-                            },
-                            create: function (event, ui) {
-                                var txtV = $(this).slider('value');
-                                $(this).find('.ui-slider-handle').button();
-                                $(this).find('.ui-slider-handle span').text(txtV);
-                                $(this).find('.ui-slider-handle').css({
-                                    '-moz-transform': 'rotate(270deg)',
-                                    '-webkit-transform': 'rotate(270deg)',
-                                    '-o-transform': 'rotate(270deg)',
-                                    '-ms-transform': 'rotate(270deg)',
-                                    'position':'absolute',
-                                    'left':'-14px'
-                                });
-                            }
-                        });
-                    });
-                    videoList.push("@Model.videoIDs[0]");
-                    videoList.push("@Model.videoIDs[1]");
-                    createNewPlayer(0);
-                    //createNewPlayer(1);
-            </script>
+		    <script type="text/javascript">
+		        videoList.push("@Model.videoIDs[0]");
+		        videoList.push("@Model.videoIDs[1]");
+		        createNewPlayer(0);
+		    </script>
+		
 		}
 	}
     else

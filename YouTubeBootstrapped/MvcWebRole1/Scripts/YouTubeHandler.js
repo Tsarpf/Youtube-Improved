@@ -16,7 +16,7 @@ function createNewPlayer(index) {
     var playerDivId = "videoDiv" + index;
 
     swfobject.embedSWF("http://www.youtube.com/apiplayer?version=3&enablejsapi=1&playerapiid=" + playerApiId,
-        playerDivId, "640", "360", "9", null, null, params, atts);
+        playerDivId, "640", "360", "9", null, null, params, atts); //resolution and "9" is minimum flash version
 }
 
 
@@ -26,7 +26,9 @@ function onYouTubePlayerReady()
 
     mainPlayer.cueVideoById(videoList.shift(), 0, "highres"); //get video from top of list, start at 0 seconds, maximum available quality
     mainPlayer.playVideo();
-    //$('#h-slider').slider(
+
+    $('.v-slider').slider
+
     setTimeout("setVideoLength()", 1000);
 }
 
