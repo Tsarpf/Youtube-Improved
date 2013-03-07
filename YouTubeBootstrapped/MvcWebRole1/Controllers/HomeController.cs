@@ -28,59 +28,64 @@ namespace YOUTUBEiMPROVED.Controllers
             return View();
         }
 
-		[HttpPost]
-		public ActionResult Index(YoutubeResults results)
-		{
-			results = Search(results.searchString);
+        [HttpPost]
+        public ActionResult Index(YoutubeResults results)
+        {
+            results = Search(results.searchString);
 
-			return View("Index", results);
-		}
+            return View("Index", results);
+        }
 
-		private YoutubeResults Search(string searchString, YoutubeResults.SEARCHTYPE searchType = YoutubeResults.SEARCHTYPE.VIDEO) //default argument
-		{
-			YoutubeService youtube = new YoutubeService();
-			youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
+        private YoutubeResults Search(string searchString, YoutubeResults.SEARCHTYPE searchType = YoutubeResults.SEARCHTYPE.VIDEO) //default argument
+        {
+            YoutubeService youtube = new YoutubeService();
+            youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
 
-			SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
-			listRequest.Q = searchString;
-			listRequest.Order = SearchResource.Order.Relevance;
+            SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
+            listRequest.Q = searchString;
+            listRequest.Order = SearchResource.Order.Relevance;
 
-			SearchListResponse searchResponse = listRequest.Fetch();
+            SearchListResponse searchResponse = listRequest.Fetch();
 
-			YoutubeResults searchResults = new YoutubeResults();
-			searchResults.titles = new List<string>();
-			searchResults.videoIDs = new List<string>();
-			searchResults.thumbnailURLs = new List<string>();
+            YoutubeResults searchResults = new YoutubeResults();
+            searchResults.titles = new List<string>();
+            searchResults.videoIDs = new List<string>();
+            searchResults.thumbnailURLs = new List<string>();
 
-			switch (searchType)
-			{
+            switch (searchType)
+            {
                 case YoutubeResults.SEARCHTYPE.VIDEO:
 
-					foreach (SearchResult searchResult in searchResponse.Items)
-					{
-						if (searchResult.Id.Kind == "youtube#video")
-						{
-							searchResults.titles.Add(searchResult.Snippet.Title);
+                    foreach (SearchResult searchResult in searchResponse.Items)
+                    {
+                        if (searchResult.Id.Kind == "youtube#video")
+                        {
+                            searchResults.titles.Add(searchResult.Snippet.Title);
 
-							searchResults.thumbnailURLs.Add(searchResult.Snippet.Thumbnails[searchResult.Snippet.Thumbnails.Keys.ToArray()[0]].Url);
-							searchResults.videoIDs.Add(searchResult.Id.VideoId);
-						}
-					}
+                            searchResults.thumbnailURLs.Add(searchResult.Snippet.Thumbnails[searchResult.Snippet.Thumbnails.Keys.ToArray()[0]].Url);
+                            searchResults.videoIDs.Add(searchResult.Id.VideoId);
+                        }
+                    }
                     break;
 
-				case YoutubeResults.SEARCHTYPE.PLAYLIST:
+                case YoutubeResults.SEARCHTYPE.PLAYLIST:
                     //do something else
-					break;
+                    break;
 
-				case YoutubeResults.SEARCHTYPE.ALL:
+                case YoutubeResults.SEARCHTYPE.ALL:
                     //do something else
-					break;
-			}
+                    break;
+            }
 
 
 
-			return searchResults;
+            return searchResults;
 
-		}
+        }
+
+        //here be dragons!
     }
+
+
+        
 }
