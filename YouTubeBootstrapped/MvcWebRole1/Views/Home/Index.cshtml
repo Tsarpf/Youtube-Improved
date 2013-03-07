@@ -25,9 +25,10 @@
 			<div id="PlayerAreaDiv" style="position:absolute">
                 @for(int i = 0; i < 2; i++)
                 {
+                    //<div id="mainVideoDiv@(i)" style="position:absolute; width: 670px; height: 475px; top: 20px; left:20px;">
                     <div id="mainVideoDiv@(i)" style="z-index: @(i*-1); position:absolute; width: 670px; height: 475px; top: 20px; left:20px;">
 
-                        <div id="videoTitle@(i)" class="well" style="position: absolute; right:30px; left:0px;">@Model.titles[i]</div>
+                        <div id="videoTitle@(i)" class="well" style="position: absolute; right:30px; left:0px;"></div>
 
                         <div id="videoDiv@(i)" class="well" style="position: absolute; bottom: 30px; right:30px;top:65px;left:0px;"> Loading....</div>
 
@@ -43,9 +44,9 @@
                 @for (int i = 1; i < Model.thumbnailURLs.Count; i++)
                 {
                     <div class="well ui-widget-content">
-                        <p> @i
-                            <img src="@Model.thumbnailURLs[i]"/>
-                        </p>
+                        <p> 
+                            <img src="@Model.thumbnailURLs[i]"/> @Model.titles[i]
+                        </p> 
                     </div>
                 }
 			</div>
@@ -69,6 +70,7 @@
 				{
                     <script type="text/javascript">
                         videoList.push("@Model.videoIDs[i]");
+                        titleList.push("@Model.titles[i]");
                     </script>
 				}
 
@@ -76,8 +78,9 @@
                     createNewPlayer(0);
                     createNewPlayer(1);
 
-                    
+                    hidePlayer(1);
                     //document.getElementById("mainVideoDiv1").style.left = "2000px";
+                    document.getElementById("videoTitle0").innerHTML = titleList.shift();
 
 
                 </script>
