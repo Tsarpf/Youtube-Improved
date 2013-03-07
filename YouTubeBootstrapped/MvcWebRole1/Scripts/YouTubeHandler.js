@@ -87,30 +87,29 @@ function updateProgressBar(){
         if (progressPercent > 66 && !otherPlayerLoaded) {
             loadSecondPlayer();
             otherPlayerLoaded = true;
-
-            if (videoList.length == 0) {
-                playlistFinished = true;
-            }
         }
     }
 
-        if (!playlistFinished && !destroyInitiated && (videoLength - mainPlayer.getCurrentTime() <= 5)) {
-            destroyInitiated = true;
+    if (!playlistFinished && !destroyInitiated && (videoLength - mainPlayer.getCurrentTime() <= 5)) {
+        destroyInitiated = true;
 
-
-            hidePlayer(currentPlayer);
-
-            if (currentPlayer == 0) {
-                currentPlayer = 1;
-            }
-            else if (currentPlayer == 1) {
-                currentPlayer = 0;
-            }
-
-            showPlayer(currentPlayer);
-
-            setTimeout("startNewPlayer()", 3000); //Should be 1-2 seconds less than what the if condition has
+        if (videoList.length == 0) {
+            playlistFinished = true;
         }
+
+        hidePlayer(currentPlayer);
+
+        if (currentPlayer == 0) {
+            currentPlayer = 1;
+        }
+        else if (currentPlayer == 1) {
+            currentPlayer = 0;
+        }
+
+        showPlayer(currentPlayer);
+
+        setTimeout("startNewPlayer()", 3000); //Should be 1-2 seconds less than what the if condition has
+    }
 }
 
 function startNewPlayer() {
@@ -148,7 +147,7 @@ function showPlayer(index) {
     $("#mainVideoDiv" + index).animate({
         "left": "20px" //,
         //"z-index": "*=-1"       //this is in both showplayer and hideplayer functions because the other is zero so it won't be affected by the multiplication
-    }, 3000);
+    }, 1000);
 }
 
 function hidePlayer(index) {
@@ -156,5 +155,5 @@ function hidePlayer(index) {
     $("#mainVideoDiv" + index).animate({ //moves at speed "slow" to the target css value
         "left": "-750px" //,
         //"z-index": "*=-1"
-    }, 5000);
+    }, 1000);
 }
