@@ -21,35 +21,45 @@
     @if(Model != null)
 	{
         if(Model.titles != null && Model.videoIDs != null)
-		{ //player size 640 360
-			<div id="PlayerAreaDiv" style="position:absolute">
-                @for(int i = 0; i < 2; i++)
-                {
-                    //<div id="mainVideoDiv@(i)" style="position:absolute; width: 670px; height: 475px; top: 20px; left:20px;">
-                    <div id="mainVideoDiv@(i)" style="z-index: @(i*-1); position:absolute; width: 670px; height: 475px; top: 20px; left:20px;">
+		{
+            for(int i = 0; i < 2; i++)
+            {
 
-                        <div id="videoTitle@(i)" class="well" style="position: absolute; right:30px; left:0px;"></div>
+                <div id="mainVideoDiv@(i)" class="well" style="z-index: @(i*-1); position:absolute; width: 670px; height: 550px; top: 20px; left:20px;">
 
-                        <div id="videoDiv@(i)" class="well" style="position: absolute; bottom: 30px; right:30px;top:65px;left:0px;"> Loading....</div>
+                    <div id="videoTitle@(i)" class="well" style="position: absolute; left:30px;"></div>
 
-                        <div id="v-slider@(i)" class="v-slider" style="position:absolute; right:0px; top:0px; bottom:0px; height:425px; width:20px;"></div>
+                    <div id="videoDiv@(i)" class="well"> Loading....</div> <!-- Set style in createNewPlayer in YouTubeHandler.js since it overrides this -->
 
-                        <div id="h-slider@(i)" class="h-slider" style="position:absolute; left:0px; right:0px; bottom:0px; height:20px;"></div>
+                    <div id="v-slider@(i)" class="v-slider" style="position:absolute; right:7px; top:85px; height:360px; width:20px;"></div>
 
+                    <div id="h-slider@(i)" class="h-slider" style="position:absolute; left:30px; right:0px; top:460px; height:20px; width:640px"></div>
+
+
+                    <div class="well" style="position:absolute; left:30px; top:495px; width:375px;">
+                        <button onClick="buttonPrevClicked()" class="btn btn-large"><i class="icon-step-backward"></i> Prev</button>
+                        <button onClick="buttonStopClicked()" class="btn btn-large"><i class="icon-stop"></i> Stop</button>
+                        <button onClick="buttonPauseClicked()" class="btn btn-large"><i class="icon-pause"></i> Pause</button>
+                        <button onClick="buttonPlayClicked()" class="btn btn-large"><i class="icon-play"></i> Play</button>
+                        <button onClick="buttonNextClicked()" class="btn btn-large"><i class="icon-step-forward"></i> Next</button>
                     </div>
-                }
-            </div>
+
+                </div>
+            }
         
-            <div style="position:absolute; top: 600px">
-                @for (int i = 1; i < Model.thumbnailURLs.Count; i++)
+            <div style="position:absolute; top: 700px">
+                @for (int i = 0; i < Model.thumbnailURLs.Count; i++)
                 {
                     <div class="well ui-widget-content">
                         <p> 
-                            <img src="@Model.thumbnailURLs[i]"/> @Model.titles[i]
+                            @(i+1) <img src="@Model.thumbnailURLs[i]"/> @Model.titles[i]
                         </p> 
                     </div>
                 }
 			</div>
+		
+		
+
 		
 
 		
@@ -59,6 +69,7 @@
             <script src="~/Scripts/YouTubeHandler.js"></script>
             <script src="~/Scripts/swfobject.js"></script>
             <script src="~/Scripts/JQueryStuff.js"></script>
+            <script src="~/Scripts/PlayerButtonFunctionality.js"></script>
 
         	<script type="text/javascript">
         	    $('.ui-widget-content').draggable();

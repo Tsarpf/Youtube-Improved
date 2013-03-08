@@ -334,6 +334,7 @@
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\PlayerButtonFunctionality.js" />
     <Content Include="Scripts\swfobject.js" />
     <Content Include="Scripts\YouTubeHandler.js" />
     <Content Include="Scripts\_references.js" />
@@ -352,6 +353,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Other Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

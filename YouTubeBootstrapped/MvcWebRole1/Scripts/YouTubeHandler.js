@@ -10,7 +10,7 @@ var otherPlayerLoaded = false;
 var destroyInitiated = false;
 var progressBarInterval;
 var playlistFinished = false;
-var playedVideoList = new Array;
+var playedVideoList = new Array();
 
 
 function createNewPlayer(index) {
@@ -18,7 +18,7 @@ function createNewPlayer(index) {
         var params = { allowScriptAccess: "always" };
 
         //<div id="videoDiv" class="well" style="position: absolute; bottom: 30px; right:30px;top:65px;left:0px;"> Loading....</div>
-        var atts = { id: "ytPlayer" + index, style: "position: absolute; bottom: 50px; right:30px;left:0px;" };
+        var atts = { id: "ytPlayer" + index, style: "position: absolute; top: 85px; right:30px;left:30px;" };
 
         var playerApiId = "player" + index;
 

@@ -1,9 +1,5 @@
 ﻿$(document).ready(function () {
 
-    //document.getElementById("mainVideoDiv1").style.visibility = "hidden"; //hide the other player
-    //$('#mainVideoDiv1').hide();
-    //document.getElementById("mainVideoDiv1").style.position = "fixed";
-
     $('button').button();
 
     $('.button').button();
