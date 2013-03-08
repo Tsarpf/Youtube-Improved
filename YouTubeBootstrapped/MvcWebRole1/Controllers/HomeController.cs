@@ -41,6 +41,10 @@ namespace YOUTUBEiMPROVED.Controllers
             YoutubeService youtube = new YoutubeService();
             youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
 
+			//Google.Apis.Youtube.v3.VideosResource
+			//VideosResource.ListRequest listVideo = youtube.Videos.List("<joku video id>", "contentDetails,statistics");
+			//listVideo.FieldsMask = "items(contentDetails(duration,definition), statistics(viewCount,likeCount,dislikeCount))";
+
             SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
             listRequest.Q = searchString;
             listRequest.Order = SearchResource.Order.Relevance;
