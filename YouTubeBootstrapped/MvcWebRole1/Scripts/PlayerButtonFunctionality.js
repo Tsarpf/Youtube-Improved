@@ -1,11 +1,11 @@
 ﻿function buttonPlayClicked() {
     //
-    alert("play clicked");
+    mainPlayer.playVideo();
 }
 
 function buttonPauseClicked() {
     //
-    alert("pause clicked");
+    mainPlayer.pauseVideo();
 }
 
 function buttonNextClicked() {
@@ -25,5 +25,5 @@ function buttonPrevClicked(){
 
 function buttonStopClicked() {
     //
-    alert("stop clicked");
+    mainPlayer.stopVideo();
 }
