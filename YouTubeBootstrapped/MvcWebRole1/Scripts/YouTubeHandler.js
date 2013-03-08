@@ -10,6 +10,7 @@ var otherPlayerLoaded = false;
 var destroyInitiated = false;
 var progressBarInterval;
 var playlistFinished = false;
+var playedVideoList = new Array;
 
 
 function createNewPlayer(index) {
