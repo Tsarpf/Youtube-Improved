@@ -87,31 +87,35 @@ function updateProgressBar(){
     if (videoList.length > 0) {
         if (progressPercent > 66 && !otherPlayerLoaded) {
             loadSecondPlayer();
-            otherPlayerLoaded = true;
         }
     }
 
     if (!playlistFinished && !destroyInitiated && (videoLength - mainPlayer.getCurrentTime() <= 5)) {
-        destroyInitiated = true;
-
-        if (videoList.length == 0) {
-            playlistFinished = true;
-        }
-
-        hidePlayer(currentPlayer);
-
-        if (currentPlayer == 0) {
-            currentPlayer = 1;
-        }
-        else if (currentPlayer == 1) {
-            currentPlayer = 0;
-        }
-
-        showPlayer(currentPlayer);
-
-        setTimeout("startNewPlayer()", 3000); //Should be 1-2 seconds less than what the if condition has
+        goToNextPlayer();
     }
 }
+
+function goToNextPlayer() {
+    destroyInitiated = true;
+
+    if (videoList.length == 0) {
+        playlistFinished = true;
+    }
+
+    hidePlayer(currentPlayer);
+
+    if (currentPlayer == 0) {
+        currentPlayer = 1;
+    }
+    else if (currentPlayer == 1) {
+        currentPlayer = 0;
+    }
+
+    showPlayer(currentPlayer);
+
+    setTimeout("startNewPlayer()", 3000); //Should be 1-2 seconds less than what the if condition has
+}
+
 
 function startNewPlayer() {
     var player = document.getElementById("ytPlayer" + currentPlayer);
@@ -124,6 +128,8 @@ function startNewPlayer() {
 
 function loadSecondPlayer() {
     console.log("current player: " + currentPlayer);
+
+    otherPlayerLoaded = true;
 
     if (currentPlayer == 0) {
         document.getElementById("ytPlayer1").cueVideoById(videoList.shift(), 0, "highres");
