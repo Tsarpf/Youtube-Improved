@@ -10,9 +10,7 @@ var otherPlayerLoaded = false;
 var destroyInitiated = false;
 var progressBarInterval;
 var playlistFinished = false;
-var playedVideoList = new Array();
-var playedVideoTitleList = new Array();
-var currentVideoIdx;
+var currentVideoIdx = 0;
 
 function createNewPlayer(index) {
 
@@ -34,7 +32,7 @@ function onYouTubePlayerReady()
     if (firstRun) {
         firstRun = false;
         var player = document.getElementById("ytPlayer" + currentPlayer);
-        player.cueVideoById(videoList.shift(), 0, "highres"); //get video from top of list, start at 0 seconds, maximum available quality
+        player.cueVideoById(videoList[0], 0, "highres"); //get video from top of list, start at 0 seconds, maximum available quality
         player.playVideo();
         mainPlayer = player;
         setTimeout("setUp()", 1000);
@@ -84,7 +82,7 @@ function updateProgressBar(){
     var text = (videoLength - mainPlayer.getCurrentTime()).toFixed(); //+ "s";
     $('.h-slider').find('.ui-slider-handle span').text(text)
 
-    if (videoList.length > 0) {
+    if (currentVideoIdx + 1 < videoList.length) { //aka if there is a next video
         if (progressPercent > 66 && !otherPlayerLoaded) {
             loadSecondPlayer();
         }
@@ -133,20 +131,22 @@ function loadSecondPlayer(direction) {
     
     otherPlayerLoaded = true;
 
-    var video;
-    var title;
     if (direction == "forward") {
-        video = videoList.shift();
-        title = titleList.shift();
+        currentVideoIdx++;
     }
 
-    else if (direction == "backward" && playedVideoList.length > 0)    {
-
-
+    else if (direction == "backward" && currentVideoIdx > 0) {
+        currentVideoIdx--;
     }
-    
-    playedVideoTitleList.push(title);
-    playedVideoList.push(video);
+    else {
+        console.log("Error: cannot go backwards from first video");
+        //Can't go backward
+        //return;
+    }
+
+
+    var video = videoList[currentVideoIdx];
+    var title = titleList[currentVideoIdx];
 
     var index;
 

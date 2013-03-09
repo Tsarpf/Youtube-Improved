@@ -15,7 +15,7 @@ function buttonNextClicked() {
 
     //Now we cannot assume that any checks have been done so we have to do them ourselves.
 
-    if (playlistFinished || destroyInitiated || videoList.length == 0) { //not sure if the last one is needed
+    if (playlistFinished || destroyInitiated || currentVideoIdx + 1 >= videoList.length) {
         return; //Either there is no video after this one, or we're already in the process of changing to an other one
     }
 
@@ -25,7 +25,7 @@ function buttonNextClicked() {
 }
 
 function buttonPrevClicked(){
-    alert("prev clicked");
+    console.log("prev clicked");
 
 }
 
