@@ -7,26 +7,25 @@ function buttonPauseClicked() {
 }
 
 function buttonNextClicked() {
-    if (otherPlayerLoaded) { //If it's true, it means all checks have been made so we can just jump to the next video
-        mainPlayer.stopVideo();
-        goToNextPlayer(); //Defined in YouTubeHandler.js
-        return;
-    }
-
-    //Now we cannot assume that any checks have been done so we have to do them ourselves.
-
     if (playlistFinished || destroyInitiated || currentVideoIdx + 1 >= videoList.length) {
         return; //Either there is no video after this one, or we're already in the process of changing to an other one
     }
 
-    loadSecondPlayer(); //Both in YouTubeHandler..js
-    goToNextPlayer();
     mainPlayer.stopVideo();
+    loadSecondPlayer(); //Defined in YouTubeHandler..js
+    goToNextPlayer();
 }
 
 function buttonPrevClicked(){
-    console.log("prev clicked");
+    if (currentVideoIdx - 1 < 0 || destroyInitiated) {
+        console.log("Couldn't go backwards");
+        return; 
+    }
 
+    playlistFinished = false; //Remember to put this somewhere
+    loadSecondPlayer("backward");
+    mainPlayer.stopVideo();
+    goToNextPlayer();
 }
 
 function buttonStopClicked() {

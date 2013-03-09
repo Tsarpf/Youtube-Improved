@@ -11,6 +11,7 @@ var destroyInitiated = false;
 var progressBarInterval;
 var playlistFinished = false;
 var currentVideoIdx = 0;
+var loadedVideoDirection = "forward";
 
 function createNewPlayer(index) {
 
@@ -88,7 +89,7 @@ function updateProgressBar(){
         }
     }
 
-    if (!playlistFinished && !destroyInitiated && (videoLength - mainPlayer.getCurrentTime() <= 5)) {
+    if (!playlistFinished && !destroyInitiated && (videoLength - mainPlayer.getCurrentTime() <= 3)) {
         goToNextPlayer();
     }
 }
@@ -102,6 +103,13 @@ function goToNextPlayer() {
 
     hidePlayer(currentPlayer);
 
+    if(loadedVideoDirection == "forward"){
+        currentVideoIdx++;
+    }
+    else if(loadedVideoDirection == "backward"){
+        currentVideoIdx--;
+    }
+
     if (currentPlayer == 0) {
         currentPlayer = 1;
     }
@@ -111,42 +119,44 @@ function goToNextPlayer() {
 
     showPlayer(currentPlayer);
 
-    setTimeout("startNewPlayer()", 3000); //Should be 1-2 seconds less than what the if condition has
+    setTimeout("startNewPlayer()", 1000); //Should be 1-2 seconds less than what the if condition has
 }
 
 
 function startNewPlayer() {
+    otherPlayerLoaded = false;
     var player = document.getElementById("ytPlayer" + currentPlayer);
     player.playVideo();
     mainPlayer = document.getElementById("ytPlayer" + currentPlayer); //not sure if could just mainPlayer = player ... asd tired
     destroyInitiated = false;
     setTimeout("setUp()", 1000);
-    otherPlayerLoaded = false;
 }
 
 function loadSecondPlayer(direction) {
 
     if (typeof (direction) === 'undefined') direction = "forward"; //Javascript style default argument (google)
 
+    loadedVideoDirection = direction; 
     
     otherPlayerLoaded = true;
 
+    var video;
+    var title;
+
     if (direction == "forward") {
-        currentVideoIdx++;
+        video = videoList[currentVideoIdx + 1];
+        title = titleList[currentVideoIdx + 1];
     }
 
     else if (direction == "backward" && currentVideoIdx > 0) {
-        currentVideoIdx--;
+        video = videoList[currentVideoIdx - 1];
+        title = titleList[currentVideoIdx - 1];
     }
     else {
         console.log("Error: cannot go backwards from first video");
         //Can't go backward
         //return;
     }
-
-
-    var video = videoList[currentVideoIdx];
-    var title = titleList[currentVideoIdx];
 
     var index;
 
