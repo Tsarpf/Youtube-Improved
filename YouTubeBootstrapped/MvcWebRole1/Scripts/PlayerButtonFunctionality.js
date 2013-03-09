@@ -1,15 +1,14 @@
 ﻿function buttonPlayClicked() {
-    //
     mainPlayer.playVideo();
 }
 
 function buttonPauseClicked() {
-    //
     mainPlayer.pauseVideo();
 }
 
 function buttonNextClicked() {
     if (otherPlayerLoaded) { //If it's true, it means all checks have been made so we can just jump to the next video
+        mainPlayer.stopVideo();
         goToNextPlayer(); //Defined in YouTubeHandler.js
         return;
     }
@@ -20,25 +19,18 @@ function buttonNextClicked() {
         return; //Either there is no video after this one, or we're already in the process of changing to an other one
     }
 
-    loadSecondPlayer();
-
+    loadSecondPlayer(); //Both in YouTubeHandler..js
     goToNextPlayer();
-    /*
-    alert("next clicked");
-    if (playlistFinished || destroyInitiated || otherPlayerLoaded) {
-
-        return;
-    }
-    */
-
+    mainPlayer.stopVideo();
 }
 
 function buttonPrevClicked(){
-    //
     alert("prev clicked");
+
 }
 
 function buttonStopClicked() {
-    //
     mainPlayer.stopVideo();
 }
+
+

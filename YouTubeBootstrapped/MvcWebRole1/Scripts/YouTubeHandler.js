@@ -11,7 +11,8 @@ var destroyInitiated = false;
 var progressBarInterval;
 var playlistFinished = false;
 var playedVideoList = new Array();
-
+var playedVideoTitleList = new Array();
+var currentVideoIdx;
 
 function createNewPlayer(index) {
 
@@ -44,9 +45,8 @@ function onYouTubePlayerReady()
 function setUp() {
     if (progressBarInterval)
         clearInterval(progressBarInterval);    {
-
     }
-    if (typeof mainPlayer != 'undefined') { //Video isn't player or something
+    if (typeof mainPlayer != 'undefined') { //Video isn't playing or something
         var length = mainPlayer.getDuration();
         if (length != 0){ //Length is 0 when we've started playing but metadata hasn't propagated yet.
             videoLength = length;
@@ -126,41 +126,48 @@ function startNewPlayer() {
     otherPlayerLoaded = false;
 }
 
-function loadSecondPlayer() {
-    console.log("current player: " + currentPlayer);
+function loadSecondPlayer(direction) {
 
+    if (typeof (direction) === 'undefined') direction = "forward"; //Javascript style default argument (google)
+
+    
     otherPlayerLoaded = true;
 
-    if (currentPlayer == 0) {
-        document.getElementById("ytPlayer1").cueVideoById(videoList.shift(), 0, "highres");
-        document.getElementById("ytPlayer1").playVideo();
-        document.getElementById("ytPlayer1").pauseVideo();
-        document.getElementById("videoTitle1").innerHTML = titleList.shift();
+    var video;
+    var title;
+    if (direction == "forward") {
+        video = videoList.shift();
+        title = titleList.shift();
     }
-    else if (currentPlayer == 1) {
-        document.getElementById("ytPlayer0").cueVideoById(videoList.shift(), 0, "highres");
-        document.getElementById("ytPlayer0").playVideo();
-        document.getElementById("ytPlayer0").pauseVideo();
-        document.getElementById("videoTitle0").innerHTML = titleList.shift();
+
+    else if (direction == "backward" && playedVideoList.length > 0)    {
+
+
     }
-    else {
-        console.log("This shouldn't have happened");
-        return;
-    }
+    
+    playedVideoTitleList.push(title);
+    playedVideoList.push(video);
+
+    var index;
+
+    currentPlayer == 0 ? index = 1 : index = 0; //http://msdn.microsoft.com/en-us/library/ty67wk28(v=vs.80).aspx
+
+    document.getElementById("ytPlayer" + index).cueVideoById(video, 0, "highres");
+    document.getElementById("ytPlayer" + index).playVideo();
+    document.getElementById("ytPlayer" + index).pauseVideo();
+    document.getElementById("videoTitle" + index).innerHTML = title;
 }
 
 function showPlayer(index) {
     document.getElementById("mainVideoDiv" + index).style.zIndex = 0;
     $("#mainVideoDiv" + index).animate({
-        "left": "20px" //,
-        //"z-index": "*=-1"       //this is in both showplayer and hideplayer functions because the other is zero so it won't be affected by the multiplication
+        "left": "20px"
     }, 1000);
 }
 
 function hidePlayer(index) {
     document.getElementById("mainVideoDiv" + index).style.zIndex = 1;
     $("#mainVideoDiv" + index).animate({ //moves at speed "slow" to the target css value
-        "left": "-750px" //,
-        //"z-index": "*=-1"
+        "left": "-750px"
     }, 1000);
 }
