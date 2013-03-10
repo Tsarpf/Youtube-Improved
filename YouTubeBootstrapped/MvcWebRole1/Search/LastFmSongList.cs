@@ -6,7 +6,7 @@ namespace YOUTUBEiMPROVED.Search
 {
 	static public class LastFmSongList
 	{
-        static const string APIKey = "667ef273abfb5d504de318468e6af79c";
+        static string APIKey = "667ef273abfb5d504de318468e6af79c";
 
 		static public List<SongStruct> getTopTracksForArtist(string artist, int limit = 10)
 		{

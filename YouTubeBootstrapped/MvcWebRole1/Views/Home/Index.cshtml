@@ -25,7 +25,7 @@
             for(int i = 0; i < 2; i++)
             {
 
-                <div id="mainVideoDiv@(i)" class="well" style="z-index: @(i*-1); position:absolute; width: 670px; height: 550px; top: 20px; left:20px;">
+                <div id="mainVideoDiv@(i)" class="well" style="z-index: @(i*-1); position:absolute; width: 670px; height: 550px; top: 20px; left:5px;">
 
                     <div id="videoTitle@(i)" class="well" style="position: absolute; left:30px;"></div>
 
@@ -47,21 +47,19 @@
                 </div>
             }
         
-            <div style="position:absolute; top: 700px">
+            <div id="accordion" style="position:absolute; top: 650px; width: 670px; height: @(Model.titles.Count*50)px">
                 @for (int i = 0; i < Model.thumbnailURLs.Count; i++)
                 {
-                    <div class="well ui-widget-content">
-                        <p> 
-                            @(i+1) <img src="@Model.thumbnailURLs[i]"/> @Model.titles[i]
-                        </p> 
+					<div class="group" style="zoom: 1;">
+                        <h3 class="well">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@(i+1) @Model.titles[i]</h3>
+                        <div>
+                            <div>                                <img src="@Model.thumbnailURLs[i]"/>
+                                @Model.descriptions[i]
+                            </div>
+                        </div>
                     </div>
                 }
 			</div>
-		
-		
-
-		
-
 		
             <script src="~/Scripts/jquery-1.9.1.min.js"> </script>
             <script src="~/jquery-bootstrap/assets/js/bootstrap.min.js"></script>
@@ -72,7 +70,20 @@
             <script src="~/Scripts/PlayerButtonFunctionality.js"></script>
 
         	<script type="text/javascript">
-        	    $('.ui-widget-content').draggable();
+        	    $('#accordion').accordion({
+        	        header: "> div > h3",
+                    collapsible: true
+                })
+                .sortable({
+                    axis: "y",
+                    handle: "h3",
+                    stop: function (event, ui) {
+                        // IE doesn't register the blur when sorting
+                        // so trigger focusout handlers to remove .ui-state-focus
+                        console.log("stopped draggin yo");
+                        ui.item.children("h3").triggerHandler("focusout");
+                    }
+                  });
             </script>
 		
 		

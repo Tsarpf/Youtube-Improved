@@ -14,6 +14,7 @@ using Google.Apis.Samples.Helper;
 using Google.Apis.Youtube.v3;
 using Google.Apis.Youtube.v3.Data;
 using YOUTUBEiMPROVED.Models;
+using YOUTUBEiMPROVED.Search;
 
 namespace YOUTUBEiMPROVED.Controllers
 {
@@ -31,7 +32,9 @@ namespace YOUTUBEiMPROVED.Controllers
         [HttpPost]
         public ActionResult Index(YoutubeResults results)
         {
-            results = Search(results.searchString);
+			results = YouTubeOptimalResultFinder.getResultsForList(LastFmSongList.getTopTracksForArtist(results.searchString));
+
+            //results = Search(results.searchString);
 
             return View("Index", results);
         }
@@ -40,10 +43,6 @@ namespace YOUTUBEiMPROVED.Controllers
         {
             YoutubeService youtube = new YoutubeService();
             youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
-
-			//Google.Apis.Youtube.v3.VideosResource
-			//VideosResource.ListRequest listVideo = youtube.Videos.List("<joku video id>", "contentDetails,statistics");
-			//listVideo.FieldsMask = "items(contentDetails(duration,definition), statistics(viewCount,likeCount,dislikeCount))";
 
             SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
             listRequest.Q = searchString;

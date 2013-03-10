@@ -10,6 +10,7 @@ namespace YOUTUBEiMPROVED.Models
         public List<string> titles {get; set;}
 		public List<string> videoIDs { get; set; }
 		public List<string> thumbnailURLs { get; set; }
+		public List<string> descriptions { get; set; }
 		public string searchString { get; set; }
 
 		public enum SEARCHTYPE
