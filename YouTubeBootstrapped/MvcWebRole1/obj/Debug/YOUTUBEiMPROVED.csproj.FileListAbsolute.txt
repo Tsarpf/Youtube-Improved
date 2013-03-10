@@ -134,3 +134,6 @@ C:\Users\TonTTu\Documents\GitHub\CodeCampSankarit\YouTubeBootstrapped\MvcWebRole
 C:\Users\TonTTu\Documents\GitHub\CodeCampSankarit\YouTubeBootstrapped\MvcWebRole1\obj\Debug\YOUTUBEiMPROVED.csprojResolveAssemblyReference.cache
 C:\Users\TonTTu\Documents\GitHub\CodeCampSankarit\YouTubeBootstrapped\MvcWebRole1\obj\Debug\MvcWebRole1.dll
 C:\Users\TonTTu\Documents\GitHub\CodeCampSankarit\YouTubeBootstrapped\MvcWebRole1\obj\Debug\MvcWebRole1.pdb
+C:\CODE\GitHub\CodeCampSankarit\YouTubeBootstrapped\MvcWebRole1\bin\Newtonsoft.Json.Net35.dll
+C:\CODE\GitHub\CodeCampSankarit\YouTubeBootstrapped\MvcWebRole1\bin\Newtonsoft.Json.xml
+C:\CODE\GitHub\CodeCampSankarit\YouTubeBootstrapped\MvcWebRole1\obj\Debug\YOUTUBEiMPROVED.csprojResolveAssemblyReference.cache
