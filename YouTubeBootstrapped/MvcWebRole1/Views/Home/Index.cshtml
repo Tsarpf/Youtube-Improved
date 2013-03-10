@@ -72,7 +72,9 @@
         	<script type="text/javascript">
         	    $('#accordion').accordion({
         	        header: "> div > h3",
-                    collapsible: true
+        	        collapsible: true,
+                    active: false,
+                    heightStyle: "content"
                 })
                 .sortable({
                     axis: "y",
@@ -81,6 +83,7 @@
                         // IE doesn't register the blur when sorting
                         // so trigger focusout handlers to remove .ui-state-focus
                         console.log("stopped draggin yo");
+
                         ui.item.children("h3").triggerHandler("focusout");
                     }
                   });
@@ -147,11 +150,15 @@
             </p>
         
             <div style="margin: auto; width:200px;">
-                @Html.TextBoxFor(x => x.searchString)
+                Get top 10 tracks from an artist: @Html.TextBoxFor(x => x.searchString)
                 <p></p>
                 <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />     
             </div>
-		
+		    /*
+		    <div style="margin: auto; width:200px;">
+                Get something else
+		    </div>
+		    */
             <script src="~/Scripts/jquery-1.9.1.min.js"> </script>
             <script src="~/jquery-bootstrap/assets/js/bootstrap.min.js"></script>
             <script src="~/jquery-bootstrap/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
