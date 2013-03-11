@@ -53,6 +53,39 @@ namespace YOUTUBEiMPROVED.Search
 			return searchResults;
 		}
 
+		public static YoutubeResults NormalSearch(string searchString) //default argument
+		{
+			YoutubeService youtube = new YoutubeService();
+			youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
+
+			SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
+			listRequest.Q = searchString;
+			listRequest.Order = SearchResource.Order.Relevance;
+
+			SearchListResponse searchResponse = listRequest.Fetch();
+
+			YoutubeResults searchResults = new YoutubeResults();
+			searchResults.titles = new List<string>();
+			searchResults.videoIDs = new List<string>();
+			searchResults.thumbnailURLs = new List<string>();
+			searchResults.descriptions = new List<string>();
+
+            foreach (SearchResult searchResult in searchResponse.Items)
+            {
+                if (searchResult.Id.Kind == "youtube#video")
+                {
+                    searchResults.titles.Add(searchResult.Snippet.Title);
+
+                    searchResults.thumbnailURLs.Add(searchResult.Snippet.Thumbnails[searchResult.Snippet.Thumbnails.Keys.ToArray()[0]].Url);
+                    searchResults.videoIDs.Add(searchResult.Id.VideoId);
+
+					searchResults.descriptions.Add(searchResult.Snippet.Description);
+                }
+            }
+
+			return searchResults;
+		}
+
 
 		/*
 private static void getVideoSetFromYouTube()

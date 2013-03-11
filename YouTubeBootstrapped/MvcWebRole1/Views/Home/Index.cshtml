@@ -15,7 +15,7 @@
     <link type="text/css" href="~/jquery-bootstrap/assets/css/docs.css" rel="stylesheet" />
     <link type="text/css" href="~/jquery-bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
 
-    <title>YouTube ImProved</title>
+    <title>YouTube++ deluxe gold collectors edition</title>
 </head>
 <body>
     @if(Model != null)
@@ -126,46 +126,37 @@
                     margin: 0 auto;
 
                   }
-
-                #header {
-                    text-align: center;
-                    color: black;
-                    font-size: 18px;
-                    font-family: 'Comic Sans MS';
-                }
-                #welcome {
-                    text-align:center;
-                    color: black;
-                    font-size: 14px;
-                    font-family: 'Comic Sans MS';
-                }
-              
             </style>
         
-            <p id="header">Welcome to Youtube Improved!</p>
-            <br />
-            <p id="welcome">You have found a student project from Helsinki University's Windows Azure course. Our project was to design, code and implement some sort of program or website for Windows Azure 
-                for learning purposes. We decided our goal to be to create a website which transforms YouTube, a commonly known video-service to become easy-to-use music player with possibility to have users 
-                register their own usernames and save their own playlists for later use. You can try it out yourself by either typing your favourite song on the search-box below or just trying your luck 
-                with empty search-parameters. <br /> <br />Hope you enjoy!
-            </p>
+
         
             <div style="margin: auto; width:200px;">
-                Get top 10 tracks from an artist: @Html.TextBoxFor(x => x.searchString)
+                Search by Artist: @Html.TextBoxFor(x => x.artistSearchString, new { id = "artistBox" })
                 <p></p>
                 <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />     
             </div>
-		    /*
-		    <div style="margin: auto; width:200px;">
-                Get something else
-		    </div>
-		    */
+            <p></p>
+            <p></p>
+            <div style="margin: auto; width:200px;">
+                Normal Search: @Html.TextBoxFor(x => x.normalSearchString, new { id = "normalBox" })
+                <p></p>
+                <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />
+            </div>
+		
+		
             <script src="~/Scripts/jquery-1.9.1.min.js"> </script>
             <script src="~/jquery-bootstrap/assets/js/bootstrap.min.js"></script>
             <script src="~/jquery-bootstrap/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
 		
 		    <script type="text/javascript">
                 $('.button').button();
+                $('#artistBox').click(function () {
+                    $('#normalBox').val('');
+                });
+
+                $('#normalBox').click(function () {
+                    $('#artistBox').val('');
+                });
             </script>
         }
 	}

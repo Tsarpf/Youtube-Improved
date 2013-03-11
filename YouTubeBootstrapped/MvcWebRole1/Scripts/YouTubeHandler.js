@@ -97,10 +97,6 @@ function updateProgressBar(){
 function goToNextPlayer() {
     destroyInitiated = true;
 
-    if (videoList.length == 0) {
-        playlistFinished = true;
-    }
-
     hidePlayer(currentPlayer);
 
     if(loadedVideoDirection == "forward"){
@@ -108,6 +104,10 @@ function goToNextPlayer() {
     }
     else if(loadedVideoDirection == "backward"){
         currentVideoIdx--;
+    }
+
+    if (currentVideoIdx + 1 == videoList.length) {
+        playlistFinished = true;
     }
 
     if (currentPlayer == 0) {

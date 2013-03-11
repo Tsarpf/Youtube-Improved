@@ -21,6 +21,8 @@
         }
     });
 
+
+
     $('.v-slider').slider({
         orientation: "vertical",
         range: "min",

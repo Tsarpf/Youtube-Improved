@@ -32,58 +32,23 @@ namespace YOUTUBEiMPROVED.Controllers
         [HttpPost]
         public ActionResult Index(YoutubeResults results)
         {
-			results = YouTubeOptimalResultFinder.getResultsForList(LastFmSongList.getTopTracksForArtist(results.searchString));
+			if (results.artistSearchString != null)
+			{
+    			results = YouTubeOptimalResultFinder.getResultsForList(LastFmSongList.getTopTracksForArtist(results.artistSearchString));
+			}
+			else if (results.normalSearchString != null)
+			{
+				results = YouTubeOptimalResultFinder.NormalSearch(results.normalSearchString);
+			}
+			else if (results.artistSearchString == null && results.normalSearchString == null)
+			{
+				results = YouTubeOptimalResultFinder.NormalSearch("");
+			}
+
 
             //results = Search(results.searchString);
 
             return View("Index", results);
-        }
-
-        private YoutubeResults Search(string searchString, YoutubeResults.SEARCHTYPE searchType = YoutubeResults.SEARCHTYPE.VIDEO) //default argument
-        {
-            YoutubeService youtube = new YoutubeService();
-            youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
-
-            SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
-            listRequest.Q = searchString;
-            listRequest.Order = SearchResource.Order.Relevance;
-
-            SearchListResponse searchResponse = listRequest.Fetch();
-
-            YoutubeResults searchResults = new YoutubeResults();
-            searchResults.titles = new List<string>();
-            searchResults.videoIDs = new List<string>();
-            searchResults.thumbnailURLs = new List<string>();
-
-            switch (searchType)
-            {
-                case YoutubeResults.SEARCHTYPE.VIDEO:
-
-                    foreach (SearchResult searchResult in searchResponse.Items)
-                    {
-                        if (searchResult.Id.Kind == "youtube#video")
-                        {
-                            searchResults.titles.Add(searchResult.Snippet.Title);
-
-                            searchResults.thumbnailURLs.Add(searchResult.Snippet.Thumbnails[searchResult.Snippet.Thumbnails.Keys.ToArray()[0]].Url);
-                            searchResults.videoIDs.Add(searchResult.Id.VideoId);
-                        }
-                    }
-                    break;
-
-                case YoutubeResults.SEARCHTYPE.PLAYLIST:
-                    //do something else
-                    break;
-
-                case YoutubeResults.SEARCHTYPE.ALL:
-                    //do something else
-                    break;
-            }
-
-
-
-            return searchResults;
-
         }
 
         //here be dragons!
