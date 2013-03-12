@@ -14,7 +14,7 @@ namespace YOUTUBEiMPROVED.Search
         public static YoutubeResults getResultsForList(List<SongStruct> songs)
 		{
 			YoutubeService youtube = new YoutubeService();
-			youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
+            youtube.Key = APIKeys.APIKeyContainer.YouTubeKey; //from the dll
 
             YoutubeResults searchResults = new YoutubeResults();
             searchResults.titles = new List<string>();
@@ -56,7 +56,7 @@ namespace YOUTUBEiMPROVED.Search
 		public static YoutubeResults NormalSearch(string searchString) //default argument
 		{
 			YoutubeService youtube = new YoutubeService();
-			youtube.Key = "AIzaSyCVe9YYpgR4BJ68a8YHweLZFe8tFszFy-A";
+            youtube.Key = APIKeys.APIKeyContainer.YouTubeKey; //from the dll
 
 			SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
 			listRequest.Q = searchString;
