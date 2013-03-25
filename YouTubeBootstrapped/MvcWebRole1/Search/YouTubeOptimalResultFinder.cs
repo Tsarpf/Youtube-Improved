@@ -57,7 +57,7 @@ namespace YOUTUBEiMPROVED.Search
 		public static YoutubeResults NormalSearch(string searchString) //default argument
 		{
 			YoutubeService youtube = new YoutubeService();
-            youtube.Key = APIKeys.APIKeyContainer.YouTubeKey; //from the dll
+			youtube.Key = ConfigurationManager.AppSettings["GoogleAPIKey"]; //Gets the API key from app settings at azure
 
 			SearchResource.ListRequest listRequest = youtube.Search.List("snippet");
 			listRequest.Q = searchString;
