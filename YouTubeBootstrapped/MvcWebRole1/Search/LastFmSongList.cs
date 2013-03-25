@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Configuration;
 
 namespace YOUTUBEiMPROVED.Search
 {
 	static public class LastFmSongList
 	{
-        static string APIKey = APIKeys.APIKeyContainer.LastFMKey;
+		static string APIKey = ConfigurationManager.AppSettings["LastFmAPIKey"]; //Gets the API key from app settings at azure
 
 		static public List<SongStruct> getTopTracksForArtist(string artist, int limit = 10)
 		{

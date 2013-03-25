@@ -5,6 +5,7 @@ using System.Web;
 using YOUTUBEiMPROVED.Models;
 using Google.Apis.Youtube.v3;
 using Google.Apis.Youtube.v3.Data;
+using System.Configuration;
 
 namespace YOUTUBEiMPROVED.Search
 {
@@ -14,7 +15,7 @@ namespace YOUTUBEiMPROVED.Search
         public static YoutubeResults getResultsForList(List<SongStruct> songs)
 		{
 			YoutubeService youtube = new YoutubeService();
-            youtube.Key = APIKeys.APIKeyContainer.YouTubeKey; //from the dll
+			youtube.Key = ConfigurationManager.AppSettings["GoogleAPIKey"]; //Gets the API key from app settings at azure
 
             YoutubeResults searchResults = new YoutubeResults();
             searchResults.titles = new List<string>();
