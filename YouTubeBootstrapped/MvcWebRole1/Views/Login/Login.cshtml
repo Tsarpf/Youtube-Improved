@@ -13,7 +13,28 @@
 </head>
 <body>
     <div>
-        You've reached the Login page, which contains nothing yet. D:
+        You've reached the Login page, which has practically nothing yet. D:
+    </div>
+
+    @if (Model != null) //ie. if user got to this page after making a http post
+	{
+		<div>
+		@if (Model.correct == true)
+		{
+		    <p> Login succeeded</p>	
+		}
+        else
+        {
+            <p> Login failed</p>
+        }
+        </div>
+		
+	}
+    else
+	{
+		<p> Model is null, aka we haven't tried logging in yet...</p>
+	}
+    <div>
     </div>
 </body>
 </html>

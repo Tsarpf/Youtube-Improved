@@ -22,7 +22,15 @@ namespace YOUTUBEiMPROVED.Controllers
 		public ActionResult Login(LoginData login)
 		{
             //TODO: Check if username&password are correct etc
-			return View();
+
+
+            //Do something with login.password
+            //Do something with login.username
+
+			login.correct = false;
+
+
+			return View("Login", login);
 		}
 
     }

@@ -7,7 +7,8 @@ namespace YOUTUBEiMPROVED.Models
 {
 	public class LoginData
 	{
-		string username { get; set; }
-		string password { get; set; }
+		public string username { get; set; }
+		public string password { get; set; }
+		public bool correct { get; set; }
 	}
 }
