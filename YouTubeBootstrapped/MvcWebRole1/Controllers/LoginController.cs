@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using YOUTUBEiMPROVED.Models;
 
-namespace MvcWebRole1.Controllers
+namespace YOUTUBEiMPROVED.Controllers
 {
     public class LoginController : Controller
     {
@@ -13,13 +13,13 @@ namespace MvcWebRole1.Controllers
         // GET: /Login/
 
 		[HttpGet]
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View(); //Return the normal view
         }
 
 		[HttpPost]
-		public ActionResult Index(LoginData login)
+		public ActionResult Login(LoginData login)
 		{
             //TODO: Check if username&password are correct etc
 			return View();
