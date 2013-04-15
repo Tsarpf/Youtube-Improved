@@ -28,8 +28,7 @@ namespace YOUTUBEiMPROVED.Controllers
             //TODO: Check if username&password are correct etc
 
 			SqlConnection connection;
-			try
-			{
+
 				SqlConnectionStringBuilder csBuilder;
 				csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
 				csBuilder.IntegratedSecurity = false;
@@ -37,6 +36,8 @@ namespace YOUTUBEiMPROVED.Controllers
 				connection = new SqlConnection(csBuilder.ToString());
 				connection.Open();
 
+			try
+			{
 				SqlDataReader reader = null;
 				SqlCommand command = new SqlCommand("select * from \"User\"", connection);
 				reader = command.ExecuteReader();
