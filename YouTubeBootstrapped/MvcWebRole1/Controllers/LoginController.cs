@@ -33,7 +33,9 @@ namespace YOUTUBEiMPROVED.Controllers
 
 			try
 			{
-				csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+				//csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+				csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.AppSettings["DBConnectionString"]);
+				//
 				csBuilder.IntegratedSecurity = false;
 			}
 			catch (Exception e)
