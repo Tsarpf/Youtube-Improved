@@ -27,13 +27,14 @@ namespace YOUTUBEiMPROVED.Controllers
 		{
             //TODO: Check if username&password are correct etc
 
+			SqlConnection connection;
 			try
 			{
 				SqlConnectionStringBuilder csBuilder;
 				csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
 				csBuilder.IntegratedSecurity = false;
 
-				SqlConnection connection = new SqlConnection(csBuilder.ToString());
+				connection = new SqlConnection(csBuilder.ToString());
 				connection.Open();
 
 				SqlDataReader reader = null;
