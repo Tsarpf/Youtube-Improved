@@ -13,42 +13,32 @@
 </head>
 <body>
     <div>
-        You've reached the Login page, which has practically nothing yet. D:
+        Login page. How exciting.
     </div>
 
     @if (Model != null) //ie. if user got to this page after making a http post
 	{
-		<div>
-            @if (Model.correct == true)
-            {
-                <p> Login succeeded</p>	
-            }
-            else
-            {
-                <p> Login failed</p>
 
-            }
-
-            @if (Model.loginMessage != null)
+            if (Model.loginMessage != null)
             {
-                <p>@Model.loginMessage</p>
+		        <div>
+                    <p>@Model.loginMessage</p>
+		        </div>
             }
-        </div>
 		
 	}
-    else
-	{
-		<p> Model is null, aka we haven't tried logging in yet...</p>
-        <p></p>
-		using (Html.BeginForm())
-		{
-            <div style="margin: auto; width: 200px;">
-                Username: @Html.TextBoxFor(x => x.username, new { id = "usernameBox" })
-                Password: @Html.PasswordFor(x => x.password, new { id = "passwordBox" })
-                <input type="submit" value="Login" />
-            </div>
-	    }
-	}
+
+    <p></p>
+    
+    @using (Html.BeginForm())
+    {
+        <div style="margin: auto; width: 200px;">
+            Username: @Html.TextBoxFor(x => x.username, new { id = "usernameBox" })
+            Password: @Html.PasswordFor(x => x.password, new { id = "passwordBox" })
+            <input type="submit" value="Login" />
+        </div>
+    }
+
     <div>
     </div>
 </body>
