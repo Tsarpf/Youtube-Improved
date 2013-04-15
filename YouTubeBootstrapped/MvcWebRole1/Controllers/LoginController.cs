@@ -29,19 +29,26 @@ namespace YOUTUBEiMPROVED.Controllers
 
 			SqlConnection connection = null;
 
-            SqlConnectionStringBuilder csBuilder;
+            SqlConnectionStringBuilder csBuilder = null;
 
 			try
 			{
 				csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
 				csBuilder.IntegratedSecurity = false;
-
+			}
+			catch (Exception e)
+			{
+				login.loginMessage = "builder fail: " + e.Message;
+				return View("Login", login);
+			}
+            try
+			{
 				connection = new SqlConnection(csBuilder.ToString());
 				connection.Open();
 			}
 			catch (Exception e)
 			{
-				login.loginMessage = e.Message;
+				login.loginMessage = "connection fail: " + e.Message;
 				return View("Login", login);
 			}
 			try
