@@ -27,26 +27,33 @@ namespace YOUTUBEiMPROVED.Controllers
 		{
             //TODO: Check if username&password are correct etc
 
-			SqlConnectionStringBuilder csBuilder;
-			csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-			csBuilder.IntegratedSecurity = false;
-
-			SqlConnection connection = new SqlConnection(csBuilder.ToString());
-			connection.Open();
-
-			SqlDataReader reader = null;
-			SqlCommand command = new SqlCommand("select * from \"User\"", connection);
-			reader = command.ExecuteReader();
-
-			while (reader.Read())
+			try
 			{
-				IDataRecord asd = (IDataRecord)reader;
-				for (int i = 0; i < asd.FieldCount; i++)
+				SqlConnectionStringBuilder csBuilder;
+				csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+				csBuilder.IntegratedSecurity = false;
+
+				SqlConnection connection = new SqlConnection(csBuilder.ToString());
+				connection.Open();
+
+				SqlDataReader reader = null;
+				SqlCommand command = new SqlCommand("select * from \"User\"", connection);
+				reader = command.ExecuteReader();
+
+				while (reader.Read())
 				{
-					login.loginMessage += asd[i] + " ";
+					IDataRecord asd = (IDataRecord)reader;
+					for (int i = 0; i < asd.FieldCount; i++)
+					{
+						login.loginMessage += asd[i] + " ";
+					}
+					login.loginMessage += "\n";
 				}
-				login.loginMessage += "\n";
-            }
+			}
+			catch (Exception e)
+			{
+				login.loginMessage = e.Message;
+			}
 
             /*
 			//Retrieve column schema into a DataTable.
