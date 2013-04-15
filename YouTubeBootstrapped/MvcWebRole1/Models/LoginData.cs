@@ -10,5 +10,6 @@ namespace YOUTUBEiMPROVED.Models
 		public string username { get; set; }
 		public string password { get; set; }
 		public bool correct { get; set; }
+		public string loginMessage { get; set; }
 	}
 }
