@@ -29,6 +29,7 @@ namespace YOUTUBEiMPROVED.Controllers
 
 			SqlConnectionStringBuilder csBuilder;
 			csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
+			csBuilder.IntegratedSecurity = false;
 
 			SqlConnection connection = new SqlConnection(csBuilder.ToString());
 			connection.Open();
