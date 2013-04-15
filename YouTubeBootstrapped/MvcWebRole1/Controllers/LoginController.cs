@@ -29,8 +29,6 @@ namespace YOUTUBEiMPROVED.Controllers
 
 			SqlConnectionStringBuilder csBuilder;
 			csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-			string password = ConfigurationManager.AppSettings["DatabasePassword"];
-			csBuilder.Password = password;
 
 			SqlConnection connection = new SqlConnection(csBuilder.ToString());
 			connection.Open();
