@@ -38,7 +38,17 @@ namespace YOUTUBEiMPROVED.Controllers
 			SqlCommand command = new SqlCommand("select * from \"User\"", connection);
 			reader = command.ExecuteReader();
 
+			while (reader.Read())
+			{
+				IDataRecord asd = (IDataRecord)reader;
+				for (int i = 0; i < asd.FieldCount; i++)
+				{
+					login.loginMessage += asd[i] + " ";
+				}
+				login.loginMessage += "\n";
+            }
 
+            /*
 			//Retrieve column schema into a DataTable.
 			DataTable schemaTable = reader.GetSchemaTable();
 
@@ -54,7 +64,7 @@ namespace YOUTUBEiMPROVED.Controllers
 				login.loginMessage += "\n";
 
 			}
-
+            */
 
 			connection.Close();
 
