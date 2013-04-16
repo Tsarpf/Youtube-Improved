@@ -14,10 +14,20 @@
     <link type="text/css" href="~/jquery-bootstrap/assets/css/font-awesome.min.css" rel="stylesheet" />
     <link type="text/css" href="~/jquery-bootstrap/assets/css/docs.css" rel="stylesheet" />
     <link type="text/css" href="~/jquery-bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
     <title>YouTube++ deluxe gold collectors edition</title>
 </head>
 <body>
+
+    <div id="loginDiv" style="position:absolute; right: 100px;">
+
+        @{
+            Html.RenderAction("Login","Login");
+        }
+
+    </div>
+
     @if(Model != null)
 	{
         if(Model.titles != null && Model.videoIDs != null)
@@ -118,31 +128,20 @@
 	{
         using (Html.BeginForm())
         {
-            
-              <style>
-                  body {
-                    min-width: 800px;
-                    max-width: 800px;
-                    margin: 0 auto;
-
-                  }
-            </style>
-        
-
-        
-            <div style="margin: auto; width:200px;">
-                Search by Artist: @Html.TextBoxFor(x => x.artistSearchString, new { id = "artistBox" })
+            <div style ="position:absolute; left: 100px">  
+                <div style="width:200px;">
+                    Search by Artist: @Html.TextBoxFor(x => x.artistSearchString, new { id = "artistBox" })
+                    <p></p>
+                    <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />     
+                </div>
                 <p></p>
-                <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />     
-            </div>
-            <p></p>
-            <p></p>
-            <div style="margin: auto; width:200px;">
-                Normal Search: @Html.TextBoxFor(x => x.normalSearchString, new { id = "normalBox" })
                 <p></p>
-                <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />
-            </div>
-		
+                <div style="width:200px;">
+                    Normal Search: @Html.TextBoxFor(x => x.normalSearchString, new { id = "normalBox" })
+                    <p></p>
+                    <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />
+                </div>
+		    </div>
 		
             <script src="~/Scripts/jquery-1.9.1.min.js"> </script>
             <script src="~/jquery-bootstrap/assets/js/bootstrap.min.js"></script>

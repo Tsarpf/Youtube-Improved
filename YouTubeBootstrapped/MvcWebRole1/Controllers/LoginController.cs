@@ -33,52 +33,32 @@ namespace YOUTUBEiMPROVED.Controllers
 
 			string serverPassword = @"!!!!!!!!(/)Q&)(/&¤";
             string givenPassword = "";
-			try
-			{
-				//csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-				csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.AppSettings["DBConnectionString"]);
-				//
-				csBuilder.IntegratedSecurity = false;
-			}
-			catch (Exception e)
-			{
-				login.loginMessage = "builder fail: " + e.Message;
-				return View("Login", login);
-			}
-            try
-			{
-				connection = new SqlConnection(csBuilder.ToString());
-				connection.Open();
-			}
-			catch (Exception e)
-			{
-				login.loginMessage = "connection fail: " + e.Message;
-				return View("Login", login);
-			}
-			try
-			{
-				SqlDataReader reader = null;
 
-				givenPassword = login.password;
-				string tinyBitSaferUsername = login.username.Replace("'", "''"); //Weak protection from SQL injections
+            csBuilder = new SqlConnectionStringBuilder(ConfigurationManager.AppSettings["DBConnectionString"]);
+            csBuilder.IntegratedSecurity = false;
 
-				SqlCommand command = new SqlCommand("SELECT Password FROM UserTable WHERE UserName = '"
-					+ tinyBitSaferUsername + "'"
-					, connection);
-				reader = command.ExecuteReader();
 
-				while (reader.Read())
-				{
-					IDataRecord asd = (IDataRecord)reader;
+            connection = new SqlConnection(csBuilder.ToString());
+            connection.Open();
+
+
+            SqlDataReader reader = null;
+
+            givenPassword = login.password;
+            string tinyBitSaferUsername = login.username.Replace("'", "''"); //Weak protection from SQL injections
+
+            SqlCommand command = new SqlCommand("SELECT Password FROM UserTable WHERE UserName = '"
+                + tinyBitSaferUsername + "'"
+                , connection);
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                IDataRecord asd = (IDataRecord)reader;
+                if(asd.FieldCount > 0)
                     if(asd[0].ToString().Length > 0)
-					    serverPassword = asd[0].ToString();
-				}
-			}
-			catch (Exception e)
-			{
-				login.correct = false;
-				login.loginMessage = "Invalid username or password";
-			}
+                        serverPassword = asd[0].ToString();
+            }
 
 			connection.Close();
 
@@ -94,7 +74,7 @@ namespace YOUTUBEiMPROVED.Controllers
 			}
 
 
-			return View("Login", login);
+			return PartialView("Login", login);
 		}
 
     }

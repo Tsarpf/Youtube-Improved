@@ -1,19 +1,7 @@
 ﻿@model YOUTUBEiMPROVED.Models.LoginData
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
-</head>
-<body>
     <div>
-        Login page. How exciting.
+        Login. How exciting.
     </div>
 
     @if (Model != null) //ie. if user got to this page after making a http post
@@ -29,10 +17,9 @@
 	}
 
     <p></p>
-    
     @using (Html.BeginForm())
     {
-        <div style="margin: auto; width: 200px;">
+        <div style="width: 200px;">
             Username: @Html.TextBoxFor(x => x.username, new { id = "usernameBox" })
             Password: @Html.PasswordFor(x => x.password, new { id = "passwordBox" })
             <input type="submit" value="Login" />
@@ -41,5 +28,3 @@
 
     <div>
     </div>
-</body>
-</html>
