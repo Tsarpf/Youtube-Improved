@@ -1,0 +1,34 @@
+﻿@model YOUTUBEiMPROVED.Models.YoutubeResults
+
+@using (Html.BeginForm())
+{
+    <div style ="position:absolute; left: 100px">  
+        <div style="width:200px;">
+            Search by Artist: @Html.TextBoxFor(x => x.artistSearchString, new { id = "artistBox" })
+            <p></p>
+            <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />     
+        </div>
+        <p></p>
+        <p></p>
+        <div style="width:200px;">
+            Normal Search: @Html.TextBoxFor(x => x.normalSearchString, new { id = "normalBox" })
+            <p></p>
+            <input type="submit" value="Search" style="margin: 0 auto; width:70px; display: block;" class="button ui-button-primary" />
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-1.9.1.min.js"> </script>
+    <script src="~/jquery-bootstrap/assets/js/bootstrap.min.js"></script>
+    <script src="~/jquery-bootstrap/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+
+    <script type="text/javascript">
+        $('.button').button();
+        $('#artistBox').click(function () {
+            $('#normalBox').val('');
+        });
+
+        $('#normalBox').click(function () {
+            $('#artistBox').val('');
+        });
+    </script>
+}

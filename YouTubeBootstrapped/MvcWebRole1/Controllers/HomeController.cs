@@ -23,6 +23,16 @@ namespace YOUTUBEiMPROVED.Controllers
         //
         // GET: /Home/
 
+		public ActionResult Search()
+		{
+			return PartialView();
+		}
+
+		public ActionResult VideoPlayer()
+		{
+			return PartialView();
+		}
+
         [HttpGet]
         public ActionResult Index()
         {

@@ -356,6 +356,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Views\Shared\Search.cshtml" />
+    <Content Include="Views\Shared\VideoPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
