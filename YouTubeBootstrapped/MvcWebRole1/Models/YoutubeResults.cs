@@ -14,6 +14,11 @@ namespace YOUTUBEiMPROVED.Models
 		public string normalSearchString { get; set; }
 		public string artistSearchString { get; set; }
 
+		public string username { get; set; }
+		public string password { get; set; }
+		public bool correct { get; set; }
+		public string loginMessage { get; set; }
+
 		public enum SEARCHTYPE
 		{
             NORMAL,
