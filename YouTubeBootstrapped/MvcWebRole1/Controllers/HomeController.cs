@@ -68,8 +68,6 @@ namespace YOUTUBEiMPROVED.Controllers
 				return Content("Empty username/password", "text/html");
 			}
 
-			return Content("Testink testink");
-            /*
             string username = results.username;
             string password = results.password;
 
@@ -80,7 +78,7 @@ namespace YOUTUBEiMPROVED.Controllers
                 results.username = null;
                 results.password = null;
 
-				return Content("replace me with something");
+				return Content("Success");
             }
 
 
@@ -89,8 +87,7 @@ namespace YOUTUBEiMPROVED.Controllers
             results.username = null;
             results.password = null;
 
-			return PartialView(results);
-            */
+			return Content("Invalid username/password");
 		}
 
 		private bool loginSuccess(string username, string password)

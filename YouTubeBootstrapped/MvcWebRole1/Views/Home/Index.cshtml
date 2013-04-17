@@ -124,18 +124,6 @@
 	{
 		using (Html.BeginForm())
 		{
-            
-              <style>
-                  body {
-                    min-width: 800px;
-                    max-width: 800px;
-                    margin: 0 auto;
-
-                  }
-            </style>
-        
-
-        
             <div style="margin: auto; width:200px;">
                 Search by Artist: @Html.TextBoxFor(x => x.artistSearchString, new { id = "artistBox" })
                 <p></p>
@@ -170,19 +158,18 @@
     @if(Model.correct == null || Model.correct == false)
 	{
 
-        <div id="testDiv" style="position:absolute; right:100px;">
-            <p id="ajaxTextArea" style="right:0px"></p>
-        </div>
+        <div id="testDiv" class="well" style="position:absolute; right:100px; width:200px; top: 50px;">
         
-		using (Ajax.BeginForm("Index", "Home", new AjaxOptions {}, new { id = "ajaxForm" }))
-        {
-                <text>Username: </text> @Html.TextBoxFor(x => x.username, new { id = "usernameBox", style="left:50px" });
-                <text>Password: </text> @Html.PasswordFor(x => x.password, new { id = "passwordBox", style="left:0px"});
-                <input type="submit" value="Login" />
-		
-		
+            <p id="ajaxTextArea" style="right:0px"></p>
+        
+            @using (Ajax.BeginForm("Index", "Home", new AjaxOptions {}, new { id = "ajaxForm" }))
+            {
+                    <text>Username: </text> @Html.TextBoxFor(x => x.username, new { id = "usernameBox" });
+                    <text>Password: </text> @Html.PasswordFor(x => x.password, new { id = "passwordBox"});
+                    <input type="submit" value="Log in" />
+            }
 
-	    }
+        </div>
     }
 
     <script type="text/javascript">
@@ -194,7 +181,15 @@
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (result) {
-                        $('#ajaxTextArea').html(result + " penis");
+                        if (result != "Success") {
+                            @{Model.correct = false;}
+                            $('#ajaxTextArea').html(result);
+                        }
+                        else {
+                            @{Model.correct = true;}
+                            $('#ajaxTextArea').html("Successfully logged in");
+                            //TODO: load users playlists etc.
+                        }
                     }
                 });
             });
